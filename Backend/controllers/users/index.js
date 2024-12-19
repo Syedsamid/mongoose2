@@ -1,6 +1,5 @@
 import express from "express"
 import userModel from "../../models/Users/index.js";
-import { error } from "console";
 const router = express.Router();
 
 // get all api
@@ -10,7 +9,7 @@ router.get("/getallusers",async (req,res)=>{
 
         console.log("i came here");
 
-      let allData = await userModel.find({});
+      let allData = await userModel.find({lastname:"test"});
       console.log(allData);
 
       res.status(200).json(allData)  
@@ -23,7 +22,7 @@ router.get("/getallusers",async (req,res)=>{
 
 router.get("/getoneuser",async(req,res)=>{
     try {
-        let check = await userModel.find({ email: "suhaiel@code.in" });
+        let check = await userModel.find({ email: "suhail@code.in" });
         console.log(check);
         res.status(200).json(check)
     } catch (error) {
@@ -36,7 +35,6 @@ router.get("/getoneuser",async(req,res)=>{
 router.post("/add",async(req,res)=>{
     try {
         let userInput = req.body
-
         console.log(userInput)
         await userModel.create(userInput)
         res.status(200).json(userInput)
@@ -51,7 +49,7 @@ router.put("/updateuser",async(req,res)=>{
     try {
         let check = await userModel.updateOne(
             { email: "suhail@code.in" },
-            { $set: { firstname: "aliss" } }
+            { $set: { firstname: "hussain" } }
           );
           res.status(200).json({msg:"data updated"})
           console.log(check)
@@ -63,9 +61,13 @@ router.put("/updateuser",async(req,res)=>{
 })
 
 
-router.delete("/userdeleteOne",(req,res)=>{
+router.delete("/userdeleteOne",async(req,res)=>{
     try {
-        
+        let deleteuserone = await userModel.deleteOne({
+            firstname: "samid", 
+        })
+        res.status(200).json({msg:"user data deleted"})
+        console.log(deleteuserone);
     } catch (error) {
         console.log(error);
         res.status(500).json({msg:error})
