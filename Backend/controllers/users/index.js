@@ -1,5 +1,5 @@
 import express from "express"
-import userModel from "../../models/Users/index.js";
+import userModel from "../../models/Users/Users.js";
 const router = express.Router();
 
 // get all api
@@ -53,7 +53,7 @@ router.put("/updateuser",async(req,res)=>{
           );
           res.status(200).json({msg:"data updated"})
           console.log(check)
-        
+
     } catch (error) {
         console.log(error);
         res.status(500).json({msg:error})

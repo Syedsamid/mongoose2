@@ -3,7 +3,9 @@ import config from "config";
 
 import "./utils/dbConnect.js"
 
+// Import Routing here
 import userRouter from "./controllers/users/index.js";
+import adminRouter from "./controllers/admin/index.js";
 
 const app = express();
 const PORT = config.get("PORT");
@@ -20,8 +22,10 @@ app.get("/",(req,res)=>{
 });
 
 app.use("/users",userRouter);
+app.use("/admin",adminRouter);
 
 
 app.listen(PORT,()=>{
     console.log(`Server is running ${PORT}`);
 })
+
