@@ -34,7 +34,7 @@ router.get("/getalladmin",async (req,res)=>{
 
 router.get("/getoneadmin",async(req,res)=>{
     try {
-        let check = await adminModel.find({profession: "softwareEng"});
+        let check = await adminModel.find({profession: "instructor"});
 
         console.log(check);
         res.status(200).json(check)
@@ -57,6 +57,7 @@ router.get("/getone/:profession",async(req,res)=>{
         res.status(500).json({msg:error})
     }
 })
+
 
 router.put("/updateadmin/:pro",async(req,res)=>{
     try {
