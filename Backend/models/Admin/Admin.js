@@ -1,16 +1,10 @@
 import mongoose from "mongoose";
 
 const adminSchema = new mongoose.Schema({
-    firstname: {
+    fullname: {
         type: String,
-        require: true,
-        maxlength: 10,
-        minlength: 3,
-    },
-    lastname: {
-        type: String,
-        require: true,
-        maxlength: 10,
+        required: true,
+        maxlength: 30,
         minlength: 3,
     },
     email: {
@@ -23,7 +17,20 @@ const adminSchema = new mongoose.Schema({
         require: true,
         maxlength: 20,
         minlength: 5,
+    },
+    gender: {
+        type: String,
+        require: true,
+        maxlength: 20,
+        minlength: 3,
+    },
+    address: {
+        type: String,
+        require: true,
+        maxlength: 30,
+        minlength: 4,
     }
+
 });
 
 const adminModel = mongoose.model("Admin",adminSchema,"admin");

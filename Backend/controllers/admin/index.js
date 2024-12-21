@@ -33,7 +33,8 @@ router.get("/getalladmin",async (req,res)=>{
 
 router.get("/getoneadmin",async(req,res)=>{
     try {
-        let check = await adminModel.find({lastname: "zeeshan"});
+        let check = await adminModel.find({profession: "softwareEng"});
+
         console.log(check);
         res.status(200).json(check)
     } catch (error) {
@@ -43,13 +44,32 @@ router.get("/getoneadmin",async(req,res)=>{
 })
 
 
-router.put("/updateadmin",async(req,res)=>{
+router.get("/getone/:profession",async(req,res)=>{
     try {
+        let userInput = req.params.profession
+
+        console.log(userInput);
+        let check = await adminModel.find({profession:userInput})
+        res.status(200).json({msg: check})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:error})
+    }
+})
+
+router.put("/updateadmin/:pro",async(req,res)=>{
+    try {
+        let userParam = req.params.pro;
+        let whattoUpdate = req.body;
+
+        console.log(userParam);
+        console.log(whattoUpdate);
+
         let check = await adminModel.updateOne(
-            { firstname: "hussain" },
-            { $set: { email: "suhail@code.in" } }
+            { email: userParam },
+            { $set: whattoUpdate}
           );
-          res.status(200).json({msg:"data updated of user"})
+          res.status(200).json({msg:"Your userdata updated"})
           console.log(check)
 
     } catch (error) {
@@ -59,10 +79,11 @@ router.put("/updateadmin",async(req,res)=>{
 })
 
 
-router.delete("/admindeleteOne",async(req,res)=>{
+router.delete("/admindeleteOne/:id",async(req,res)=>{
     try {
+        let userId = req.params.id;
         let deleteuserone = await adminModel.deleteOne({
-            firstname: "samid", 
+            _id: userId, 
         })
         res.status(200).json({msg:"user data deleted"})
         console.log(deleteuserone);
