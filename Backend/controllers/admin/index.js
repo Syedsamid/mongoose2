@@ -1,5 +1,6 @@
 import express from "express";
 import adminModel from "../../models/Admin/Admin.js";
+import userModel from "../../models/Users/Users.js";
 
 const router = express.Router();
 
@@ -88,6 +89,18 @@ router.delete("/admindeleteOne/:id",async(req,res)=>{
         res.status(200).json({msg:"user data deleted"})
         console.log(deleteuserone);
     } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:error})
+    }
+})
+
+router.delete("/deletealladmins",async(req,res)=>{
+    try {
+        let check = await adminModel.deleteMany({})
+        console.log(check);
+        res.status(200).json({msg:"All the admins are deleted"})
+        } catch (error) {
+            console.log(check);
         console.log(error);
         res.status(500).json({msg:error})
     }
