@@ -48,7 +48,7 @@ router.get("/getoneadmin",async(req,res)=>{
 router.get("/getone/:profession",async(req,res)=>{
     try {
         let userInput = req.params.profession
-
+        
         console.log(userInput);
         let check = await adminModel.find({profession:userInput})
         res.status(200).json({msg: check})
