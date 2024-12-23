@@ -34,7 +34,7 @@ router.get("/getalladmin",async (req,res)=>{
 
 router.get("/getoneadmin",async(req,res)=>{
     try {
-        let check = await adminModel.find({profession: "instructor"});
+        let check = await adminModel.find({profession: "Sr. Engineer"});
 
         console.log(check);
         res.status(200).json(check)
@@ -48,7 +48,7 @@ router.get("/getoneadmin",async(req,res)=>{
 router.get("/getone/:profession",async(req,res)=>{
     try {
         let userInput = req.params.profession
-        
+
         console.log(userInput);
         let check = await adminModel.find({profession:userInput})
         res.status(200).json({msg: check})
