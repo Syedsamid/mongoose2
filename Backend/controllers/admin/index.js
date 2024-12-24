@@ -1,6 +1,5 @@
 import express from "express";
 import adminModel from "../../models/Admin/Admin.js";
-import userModel from "../../models/Users/Users.js";
 
 const router = express.Router();
 
@@ -81,7 +80,7 @@ router.put("/updateadmin/:pro",async(req,res)=>{
 })
 
 
-router.delete("/admindeleteOne/:id",async(req,res)=>{
+router.delete("/deleteOne/:id",async(req,res)=>{
     try {
         let userId = req.params.id;
         let deleteuserone = await adminModel.deleteOne({
